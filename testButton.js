@@ -4,7 +4,8 @@ function addButton() {
         var phoneNumber = document.getElementById("Phone Number").value
         var time = document.getElementById("Time").value
         var notificationTime = document.getElementById("Notification Time").value
-        const rtArray = [phoneNumber, time, notificationTime]
+        var content = document.getElementById("Content").value
+        const rtArray = [phoneNumber, time, notificationTime, content]
         return rtArray
     })
 
