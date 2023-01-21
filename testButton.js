@@ -1,3 +1,7 @@
+windows.onload = function() {
+    addButton()
+}
+
 function addButton() {
     let submitButton = document.getElementById("Submit Button")
     submitButton.addEventListener("click", function() {
