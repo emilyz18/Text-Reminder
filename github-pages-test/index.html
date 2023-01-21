@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Github pages localhost test</title>
+</head>
+
+<body>
+    <div id="text">Result here</div>
+    <script>
+        let textbox = document.getElementById('text');
+        let xhr = new XMLHttpRequest;
+        xhr.onerror = event => {
+            textbox.innerText = 'Error';
+        }
+        xhr.onload = event => {
+            textbox.innerText = xhr.responseText;
+        }
+
+        xhr.open('GET', 'localhost:8080', true);
+        xhr.send();
+    </script>
+</body>
+
+</html>
