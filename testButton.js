@@ -45,12 +45,12 @@ function addButton() {
   let randString = makeid(20).toString();
   let newjsonObj = {
     [randString]: {
-      'content': content,
-      'phoneNumber': phoneNumber,
+      'message': content,
+      'phone': phoneNumber,
       'hour': hr,
       'minute': min,
       'month': month,
-      'day': day,
+      'date': day,
       'year': year,
       'recurDays': recurDays
     }
