@@ -3,6 +3,8 @@ import os
 from twilio.rest import Client as TwilioClient
 from datetime import datetime
 import calendar
+import time
+
 calendar.setfirstweekday(calenar.SUNDAY)
 
 # Paths where things are stored
@@ -31,7 +33,7 @@ with open(REMINDERS_CONFIG_FILE) as file:
     reminders = json.JSONDecoder().decode(file.read())
     remindersSent = json.JSONDecoder().decode(REMINDERS_SENT_FILE)
 
-schedule = {}
+schedule = []
 
 
 def getFirstDate(reminder):
@@ -111,7 +113,10 @@ for reminderID in reminders.keys():
             remindersToDelete.append(reminderID)
         # If it should be sent in the future, schedule it to be sent in the future
         else:
-            schedule[getFirstDate(reminder)] = reminderID
+            schedule.append({
+                'id': reminderID,
+                'time': getFirstDate(reminder)
+            })
 
     # If the reminder does recur:
     else:
@@ -132,11 +137,45 @@ for reminderID in reminders.keys():
             curTime = getNextDate(reminder, curTime)
 
         # The loop terminates as soon as curTime is in the future. Schedule the future reminder
-        schedule[curTime] = reminderID
+        schedule.append({
+            'id': reminderID,
+            'time': curTime
+        })
 
 # Delete all reminders that we flagged for deletion
 for reminderID in remindersToDelete:
     del reminders[reminderID]
 save()
 
-# Sleep until the first scheduled reminder
+
+def printSchedule(reminderIDs, schedule):
+    # Print the schedule to the console
+    pass
+
+
+# Go through the scheduled reminders, sorted in order of when they should happen
+schedule.sort(lambda entry: entry['time'])
+while len(schedule) > 0:
+    printSchedule(reminderIDs, schedule)
+
+    nextEntry, schedule = schedule[0], schedule[1:]
+    time.sleep(max(0, nextEntry['time'] - datetime.now().timestamp()))
+    reminder = reminders[nextEntry['id']]
+
+    # If the reminder does not recur, delete it:
+    if reminder['recurrence'] == 'once' or (reminder['recurrence'] == 'weekly' and True not in reminder['recurDays']):
+        sendSMS(reminder['phone'], reminder['message'])
+        del reminder[reminderID]
+        save()
+
+    # If the reminder does recur, log it and schedule the next occurrence:
+    else:
+        sendSMS(reminder['phone'], reminder['message'])
+        remindersSent[reminderID].append(nextEntry['time'])
+        save()
+
+        schedule.append({
+            'id': reminderID,
+            'time': getNextDate(reminder, nextEntry['time'])
+        })
+        schedule.sort()  # Sort again in case next recurrence comes before another scheduled reminder
