@@ -28,20 +28,31 @@ function addButton() {
     var text = id.options[id.selectedIndex].text;
     console.log(text);
 
-    let timeSplit = time.split("T");
-    let date = timeSplit[0].split("-");
-    let year = date[0];
-    let month = date[1];
-    let day = date[2];
+    let hr = "";
+    let min = "";
+    let month = "";
+    let day = "";
+    let year = "";
 
-    console.log(year);
-    console.log(month);
-    console.log(day);
+    if (time) {
+      let timeSplit = time.split("T");
+      let date = timeSplit[0].split("-");
+      year = date[0];
+      month = date[1];
+      day = date[2];
+  
+      console.log(year);
+      console.log(month);
+      console.log(day);
+  
+      console.log(date);
+      let hrmin = timeSplit[1].split(":");
+      hr = hrmin[0];
+      min = hrmin[1];
 
-    console.log(date);
-    let hrmin = timeSplit[1].split(":");
-    let hr = hrmin[0];
-    let min = hrmin[1];
+    }
+
+   
 
     const rtArray = [content, phoneNumber, hr, min, month, day, year, notificationTime, , recurDays]
 
