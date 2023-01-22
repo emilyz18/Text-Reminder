@@ -4,6 +4,7 @@ from twilio.rest import Client as TwilioClient
 from datetime import datetime
 import calendar
 import time
+import sys
 
 calendar.setfirstweekday(calenar.SUNDAY)
 
@@ -41,7 +42,7 @@ def getFirstDate(reminder):
     return datetime(
         reminder['year'],
         reminder['month'],
-        reminer['date'],
+        reminder['date'],
         reminder['hour'],
         reminder['minute'],
         0
@@ -101,62 +102,58 @@ def save():
         file.write(json.JSONEncoder().encode(remindersSent))
 
 
-remindersToDelete = []
 for reminderID in reminders.keys():
     reminder = reminders[reminderID]
 
-    # If the reminder does not recur:
+    # If the reminder does not recur, schedule it. If it had been sent, it would have been deleted. Anything scheduled in the past will be sent immediately.
     if reminder['recurrence'] == 'once' or (reminder['recurrence'] == 'weekly' and True not in reminder['recurDays']):
-        # If it should have been sent already, it should be sent then deleted. (We don't bother logging non-recurring reminders in reminersSent because they should be deleted immediately.)
-        if getFirstDate(reminder) < datetime().now().timestamp():
-            sendSMS(reminder['phone'], reminder['message'])
-            remindersToDelete.append(reminderID)
-        # If it should be sent in the future, schedule it to be sent in the future
-        else:
-            schedule.append({
-                'id': reminderID,
-                'time': getFirstDate(reminder)
-            })
+        schedule.append({
+            'id': reminderID,
+            'time': getFirstDate(reminder)
+        })
 
     # If the reminder does recur:
     else:
-        # For every time that the reminder should have occurred in the past, send it if it has to be sent
-        # Start with the first date that the reminder should have been sent
+        # For every time that the reminder should have occurred in the past:
         curTime = getFirstDate(reminder)
         while (curTime < datetime().now().timestamp()):
-            # If the reminder has no record in remindersSent, create one
-            if reminderID not in remindersSent.keys():
-                remindersSent[reminderID] = []
+            # If this occurrence has not been sent, stop here.
+            if (reminderID not in remindersSent) or (curTime > remindersSent[reminderID]):
+                break
 
-            # If this occurrence has not been sent, send it and log that we sent it
-            if curTime not in remindersSent[reminderID]:
-                sendSMS(reminder['phone'], reminder['message'])
-                remindersSent[reminderID].append(curTime)
-
-            # Repeat for the next occurrence
+            # Check the next occurrence
             curTime = getNextDate(reminder, curTime)
 
-        # The loop terminates as soon as curTime is in the future. Schedule the future reminder
+        # When the loop terminates, it means that either:
+        #   We passed the last occurrence that was actually sent, and need to send the rest
+        #   We are now in the future, and need to schedule the future reminder
         schedule.append({
             'id': reminderID,
             'time': curTime
         })
 
-# Delete all reminders that we flagged for deletion
-for reminderID in remindersToDelete:
-    del reminders[reminderID]
 save()
 
 
 def printSchedule(reminderIDs, schedule):
     # Print the schedule to the console
-    pass
+    for entry in schedule:
+        reminder = reminders[entry["id"]]
+        dt = datetime.fromtimestamp(entry["time"])
+        weekday = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday',
+                   'Saturday'][fixWeekday(calendar.weekday(dt.year, dt.month, dt.day))]
+        print(
+            f'To {reminder["phone"]} at {weekday}, {dt}: {reminder["message"]}')
 
 
 # Go through the scheduled reminders, sorted in order of when they should happen
 schedule.sort(lambda entry: entry['time'])
 while len(schedule) > 0:
     printSchedule(reminderIDs, schedule)
+    if len(sys.argv) >= 2 and sys.argv[1] == 'PAUSE':
+        input('Paused')
+    else:
+        print()
 
     nextEntry, schedule = schedule[0], schedule[1:]
     time.sleep(max(0, nextEntry['time'] - datetime.now().timestamp()))
@@ -171,7 +168,7 @@ while len(schedule) > 0:
     # If the reminder does recur, log it and schedule the next occurrence:
     else:
         sendSMS(reminder['phone'], reminder['message'])
-        remindersSent[reminderID].append(nextEntry['time'])
+        remindersSent[reminderID] = nextEntry['time']
         save()
 
         schedule.append({
