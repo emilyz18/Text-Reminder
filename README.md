@@ -35,4 +35,4 @@ Additionally, if the recurrence is set to be based on weeks, you can check or un
 ## Demo
 
 <img width="650" alt="image" src="https://user-images.githubusercontent.com/105086688/213934891-de61c33b-6fb0-46da-9053-b470eb61cacc.png">
-![image](https://user-images.githubusercontent.com/105086688/213934907-44cb00d5-a653-44ca-8763-c478cd26f410.png)
+<img width="204" alt="image" src="https://user-images.githubusercontent.com/105086688/213935059-e6994b45-848b-45de-b239-f6768cf63d33.png">
