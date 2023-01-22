@@ -17,6 +17,10 @@ body {
   /* background-color: lightgoldenrodyellow; */
   font-family: monospace;
   font-size: large;
+  background-image: url('background.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
 }
 
 .hidden {
@@ -122,4 +126,4 @@ form div {
 
 h1 {
   font-size: 3em;
-}
+} 
