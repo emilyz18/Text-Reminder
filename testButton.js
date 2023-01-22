@@ -24,6 +24,7 @@ function addButton() {
 
     if (allEqual && text == 'weekly') {
         console.log("success")
+        recurDays = []
         document.getElementById("error").innerText = "must select at least one"
         
     } else {
