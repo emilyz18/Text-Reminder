@@ -20,19 +20,15 @@ function submit() {
     min = hrmin[1];
   }
 
-  function strToBool(str) {
-    return str == "true";
-  }
-
   recurrence = document.getElementById("Recurence Dropdown").value;
   recurDays = [
-    strToBool(document.getElementById("Sunday").value),
-    strToBool(document.getElementById("Monday").value),
-    strToBool(document.getElementById("Tuesday").value),
-    strToBool(document.getElementById("Wednesday").value),
-    strToBool(document.getElementById("Thursday").value),
-    strToBool(document.getElementById("Friday").value),
-    strToBool(document.getElementById("Saturday").value)
+    document.getElementById("Sunday").checked,
+    document.getElementById("Monday").checked,
+    document.getElementById("Tuesday").checked,
+    document.getElementById("Wednesday").checked,
+    document.getElementById("Thursday").checked,
+    document.getElementById("Friday").checked,
+    document.getElementById("Saturday").checked
   ];
 
   let newjsonObj = {
