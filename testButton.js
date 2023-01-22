@@ -12,9 +12,7 @@ function addButton() {
     document.getElementById("Saturday").value,
     document.getElementById("Sunday").value]
     const allEqual = recurDays.every(v => v == "false")
-    //  console.log(allEqual)
     if (allEqual && text == 'weekly') {
-      // console.log("success")
       document.getElementById("error").innerText = "must select at least one"
 
     } else {
@@ -24,7 +22,6 @@ function addButton() {
   var id = document.getElementById("Recurence Dropdown")
 
   var text = id.options[id.selectedIndex].text;
-  // console.log(text);
 
   let hr = "";
   let min = "";
@@ -39,11 +36,6 @@ function addButton() {
     month = date[1];
     day = date[2];
 
-    // console.log(year);
-    // console.log(month);
-    // console.log(day);
-
-    // console.log(date);
     let hrmin = timeSplit[1].split(":");
     hr = hrmin[0];
     min = hrmin[1];
@@ -64,39 +56,26 @@ function addButton() {
     }
   }
 
-  // console.log(mainArr)
-
 
   console.log(randString);
   console.log(JSON.stringify(newjsonObj));
 
-  // console.log(jsonObj);
+  // Send the data to the server
+  let xhr = new XMLHttpRequest;
+  xhr.onerror = event => {
+    document.getElementById("error").innerText = 'Failed to send data to server'
+  }
+  xhr.onload = event => {
+    if (xhr.status == 204) document.getElementById("error").innerText = ''
+    else if (xhr.status == 400) document.getElementById("error").innerText = 'Invalid settings rejected by server'
+    else if (xhr.status >= 500) document.getElementById("error").innerText = `Server error ${xhr.status}`
+    else document.getElementById("error").innerText = `Unknown status code ${xhr.status}`
+  }
+
+  xhr.open('POST', 'http://localhost:8080', true);
+  xhr.send(JSON.stringify(newjsonObj));
 }
 
-
-
-// function convertToJSON(keys, values) {
-//   let jsonObj = {};
-
-//   if (typeof keys == String) {
-//     values.map((elem) => {
-//       return jsonObj[keys] = elem;
-//     })
-
-//   } else {
-//     values.map((elem, index) => {
-//       let key = keys[index];
-//       return jsonObj[key] = elem;
-//     })
-//   }
-
-
-
-
-//   jsonObj = JSON.stringify(jsonObj).replace(/\\/g, "");
-
-//   return jsonObj;
-// }
 
 
 function checkbox(p) {
@@ -147,5 +126,3 @@ function makeid(length) {
   }
   return result;
 }
-
-// console.log(makeid(5));
