@@ -1,6 +1,7 @@
 # Text-Reminder
 
 Project created for [NWHacks](https://www.nwhacks.io/) 2023. A program to send SMS reminders at a scheduled time.
+
 Created by: Bruce Blore, Swapnil Dubey, Alice Low, Emily Zhang
 
 ## Setup
