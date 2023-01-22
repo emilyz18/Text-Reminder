@@ -1,13 +1,8 @@
-var mainArr = []
-
 function addButton() {
   document.getElementById("error").innerText = ""
   var phoneNumber = document.getElementById("Phone Number").value;
   var time = document.getElementById("Time").value;
   var content = document.getElementById("Content").value;
-  var phoneNumber = document.getElementById("Phone Number").value
-  var time = document.getElementById("Time").value
-  var content = document.getElementById("Content").value
   if (document.getElementById("daysblock") != null) {
     var recurDays = [document.getElementById("Monday").value,
     document.getElementById("Tuesday").value,
@@ -55,53 +50,53 @@ function addButton() {
 
   }
 
+  let randString = makeid(20).toString();
+  let newjsonObj = {
+    [randString]: {
+      'content': content,
+      'phoneNumber': phoneNumber,
+      'hour': hr,
+      'minute': min,
+      'month': month,
+      'day': day,
+      'year': year,
+      'recurDays': recurDays
+    }
+  }
 
-
-  const rtArray = [content, phoneNumber, hr, min, month, day, year, recurDays]
-
-  // Convert array to JSON format
-  const keys = ["content", "phoneNumber", "hour", "minute", "month", "day", "year", "recurDays"];
-  let jsonObj = convertToJSON(keys, rtArray);
-
-  mainArr.push(jsonObj)
   // console.log(mainArr)
 
 
-  var i = 0
-
-  let randString = makeid(20).toString();
-  let newjsonObj = (convertToJSON([randString], mainArr));
-  i += 1
   console.log(randString);
-  console.log(newjsonObj);
+  console.log(JSON.stringify(newjsonObj));
 
   // console.log(jsonObj);
 }
 
 
 
-function convertToJSON(keys, values) {
-  let jsonObj = {};
+// function convertToJSON(keys, values) {
+//   let jsonObj = {};
 
-  if (typeof keys == String) {
-    values.map((elem) => {
-      return jsonObj[keys] = elem;
-    })
+//   if (typeof keys == String) {
+//     values.map((elem) => {
+//       return jsonObj[keys] = elem;
+//     })
 
-  } else {
-    values.map((elem, index) => {
-      let key = keys[index];
-      return jsonObj[key] = elem;
-    })
-  }
-
-
+//   } else {
+//     values.map((elem, index) => {
+//       let key = keys[index];
+//       return jsonObj[key] = elem;
+//     })
+//   }
 
 
-  jsonObj = JSON.stringify(jsonObj).replace(/\\/g, "");
 
-  return jsonObj;
-}
+
+//   jsonObj = JSON.stringify(jsonObj).replace(/\\/g, "");
+
+//   return jsonObj;
+// }
 
 
 function checkbox(p) {
