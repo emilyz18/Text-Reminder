@@ -39,7 +39,7 @@ Additionally, if the recurrence is set to be based on weeks, you can check or un
      <td>Text Reminder</td>
   </tr>
   <tr>
-    <td><img src="https://user-images.githubusercontent.com/68439730/213935077-d9c5d16c-cea8-4c17-8738-58d8d5d4fa8f.png" width=270 height=480></td>
-    <td><img src="https://user-images.githubusercontent.com/68439730/213935376-3f7dad7b-ab5f-424b-a6a3-8c537712aa9e.jpg" width=270 height=480></td>
+    <td><img src="https://user-images.githubusercontent.com/68439730/213935077-d9c5d16c-cea8-4c17-8738-58d8d5d4fa8f.png" width=400 height=480></td>
+    <td><img src="https://user-images.githubusercontent.com/68439730/213935376-3f7dad7b-ab5f-424b-a6a3-8c537712aa9e.jpg" width=250 height=480></td>
   </tr>
  </table>
