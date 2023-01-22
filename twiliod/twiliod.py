@@ -6,7 +6,7 @@ import calendar
 import time
 import sys
 
-calendar.setfirstweekday(calenar.SUNDAY)
+calendar.setfirstweekday(calendar.SUNDAY)
 
 # Paths where things are stored
 CREDENTIAL_FILE = 'twiliod/credentials.json'    # Twilio credentials
@@ -30,9 +30,14 @@ def sendSMS(target, message):
     # print(message.sid)
 
 
-with open(REMINDERS_CONFIG_FILE) as file:
+# Load the saved data
+with open(REMINDER_CONFIG_FILE) as file:
     reminders = json.JSONDecoder().decode(file.read())
-    remindersSent = json.JSONDecoder().decode(REMINDERS_SENT_FILE)
+if(os.path.exists(REMINDERS_SENT_FILE)):
+    with open(REMINDERS_SENT_FILE) as file:
+        remindersSent = json.JSONDecoder().decode(file.read())
+else:
+    remindersSent = {}
 
 schedule = []
 
@@ -60,8 +65,8 @@ def addDays(timestamp, days):
     nextDayOfMonth = dt.day + days
     nextMonth = dt.month
     nextYear = dt.year
-    while nextDayOfMonth > calendar.monthrange(nextYear, nextMonth):
-        nextDayOfMonth -= calendar.monthrange(nextYear, nextMonth)
+    while nextDayOfMonth > calendar.monthrange(nextYear, nextMonth)[1]:
+        nextDayOfMonth -= calendar.monthrange(nextYear, nextMonth)[1]
         nextMonth += 1
         if nextMonth > 12:
             nextMonth -= 12
@@ -116,7 +121,7 @@ for reminderID in reminders.keys():
     else:
         # For every time that the reminder should have occurred in the past:
         curTime = getFirstDate(reminder)
-        while (curTime < datetime().now().timestamp()):
+        while (curTime < datetime.now().timestamp()):
             # If this occurrence has not been sent, stop here.
             if (reminderID not in remindersSent) or (curTime > remindersSent[reminderID]):
                 break
@@ -135,7 +140,7 @@ for reminderID in reminders.keys():
 save()
 
 
-def printSchedule(reminderIDs, schedule):
+def printSchedule(schedule):
     # Print the schedule to the console
     for entry in schedule:
         reminder = reminders[entry["id"]]
@@ -147,22 +152,21 @@ def printSchedule(reminderIDs, schedule):
 
 
 # Go through the scheduled reminders, sorted in order of when they should happen
-schedule.sort(lambda entry: entry['time'])
+schedule.sort(key=lambda entry: entry['time'])
 while len(schedule) > 0:
-    printSchedule(reminderIDs, schedule)
-    if len(sys.argv) >= 2 and sys.argv[1] == 'PAUSE':
-        input('Paused')
-    else:
-        print()
+    printSchedule(schedule)
+    print()
+    print()
 
     nextEntry, schedule = schedule[0], schedule[1:]
     time.sleep(max(0, nextEntry['time'] - datetime.now().timestamp()))
-    reminder = reminders[nextEntry['id']]
+    reminderID = nextEntry['id']
+    reminder = reminders[reminderID]
 
     # If the reminder does not recur, delete it:
     if reminder['recurrence'] == 'once' or (reminder['recurrence'] == 'weekly' and True not in reminder['recurDays']):
         sendSMS(reminder['phone'], reminder['message'])
-        del reminder[reminderID]
+        del reminders[reminderID]
         save()
 
     # If the reminder does recur, log it and schedule the next occurrence:
@@ -175,4 +179,11 @@ while len(schedule) > 0:
             'id': reminderID,
             'time': getNextDate(reminder, nextEntry['time'])
         })
-        schedule.sort()  # Sort again in case next recurrence comes before another scheduled reminder
+        # Sort again in case next recurrence comes before another scheduled reminder
+        schedule.sort(key=lambda entry: entry['time'])
+
+    printText = f'Just sent to {reminder["phone"]}: {reminder["message"]}'
+    if len(sys.argv) >= 2 and sys.argv[1] == 'PAUSE':
+        input(printText)
+    else:
+        print(printText)
