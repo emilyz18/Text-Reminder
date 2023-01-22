@@ -43,3 +43,34 @@ function convertToJSON(keys, values) {
 function checkbox(p){
     document.getElementById(p).value = true
 }
+
+function changeFunc(i) {
+        let code = '<div id = "daysblock">'+
+        '<p>Select the Days you want the reminder to recur on: </p>' +
+      '<input type="checkbox" id="Monday" name="Monday" value=false onClick="checkbox(id)">' +
+      '<label for="Monday"> Monday</label><br><br>' +
+      '<input type="checkbox" id="Tuesday" name="Tuesday" value=false onClick="checkbox(id)">' +
+      '<label for="Tuesday"> Tuesday</label><br><br>' +
+      '<input type="checkbox" id="Wednesday" name="Wednesday" value=false onClick="checkbox(id)">' +
+      '<label for="Wednesday">Wednesday</label><br><br>' +
+      '<input type="checkbox" id="Thursday" name="Thursday" value=false onClick="checkbox(id)">' +
+      '<label for="Thursday">Thursday</label><br><br>' +
+      '<input type="checkbox" id="Friday" name="Friday" value=false onClick="checkbox(id)">' +
+      '<label for="Friday">Friday</label><br><br>' +
+      '<input type="checkbox" id="Saturday" name="Saturday" value=false onClick="checkbox(id)">' +
+      '<label for="Saturday">Saturday</label><br><br>' +
+      '<input type="checkbox" id="Sunday" name="Sunday" value=false onClick="checkbox(id)">' +
+      '<label for="Sunday">Sunday</label><br><br>'+
+      '</div>';
+
+
+        if (i == 'weekly') {
+          document.getElementById("main").innerHTML += code;
+          document.getElementById("Recurence Dropdown").value = "weekly";
+        } else {
+            if ((document.getElementById("daysblock")) != null){
+            document.getElementById("daysblock").remove();
+            }
+        }
+        
+      }
