@@ -1,11 +1,12 @@
+var phoneNumber;
+let time;
+var content;
+
 function addButton() {
     document.getElementById("error").innerText = ""
-    var phoneNumber = document.getElementById("Phone Number").value;
-    var time = document.getElementById("Time").value;
-    var content = document.getElementById("Content").value;
-    var phoneNumber = document.getElementById("Phone Number").value
-    var time = document.getElementById("Time").value
-    var content = document.getElementById("Content").value
+    phoneNumber = document.getElementById("Phone Number").value;
+    time = document.getElementById("Time").value;
+    content = document.getElementById("Content").value;
     if (document.getElementById("daysblock") != null) {var recurDays = [document.getElementById("Monday").value,
                      document.getElementById("Tuesday").value,
                      document.getElementById("Wednesday").value,
@@ -52,10 +53,10 @@ function addButton() {
 
    
 
-    const rtArray = [content, phoneNumber, hr, min, month, day, year, recurDays]
+    const rtArray = [content, phoneNumber, hr, min, month, day, year, text, recurDays]
 
     // Convert array to JSON format
-    const keys = ["content", "phoneNumber", "hour", "minute", "month", "day", "year", "recurDays"];
+    const keys = ["content", "phoneNumber", "hour", "minute", "month", "day", "year", "recurrence", "recurDays"];
     let jsonObj = convertToJSON(keys, rtArray);
     
     console.log(jsonObj);
@@ -108,6 +109,10 @@ function changeFunc(i) {
     if (i == 'weekly') {
       document.getElementById("main").innerHTML += code;
       document.getElementById("Recurence Dropdown").value = "weekly";
+      document.getElementById("Phone Number").value = phoneNumber;
+      document.getElementById("Content").value = content;
+      document.getElementById("Time").value = time;
+
     } else {
         if ((document.getElementById("daysblock")) != null){
         document.getElementById("daysblock").remove();
