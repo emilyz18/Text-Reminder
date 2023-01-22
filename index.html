@@ -10,7 +10,7 @@
 
 <body>
   <h1>Text Reminder</h1>
-    <form>
+    <form id="main">
       <label for="number">Enter Your Phone Number: </label>
       <input type="text" id="Phone Number" name="number"><br><br>
       <label for="content">Enter the content of your Reminder: </label>
@@ -22,14 +22,14 @@
       <label for="recurDays"></label>
       
        <label for="Recurrence Dropdown">Select reccurence: </label>
-      <select name="recurences" id="Recurence Dropdown">
+      <select name="recurences" id="Recurence Dropdown" onchange="changeFunc(value)">
         <option value="once">once</option>
         <option value="daily">daily</option>
         <option value="weekly">weekly</option>
       </select> <br> <br>
       
       <!-- show only if recurrence is set to weekly-->
-      <p>Select the Days you want the reminder to recur on: </p>
+      <!-- <p>Select the Days you want the reminder to recur on: </p>
       <input type="checkbox" id="Monday" name="Monday" value=false onClick="checkbox(id)">
       <label for="Monday"> Monday</label><br>
       <input type="checkbox" id="Tuesday" name="Tuesday" value=false onClick="checkbox(id)">
@@ -43,13 +43,38 @@
       <input type="checkbox" id="Saturday" name="Saturday" value=false onClick="checkbox(id)">
       <label for="Saturday">Saturday</label><br><br>
       <input type="checkbox" id="Sunday" name="Sunday" value=false onClick="checkbox(id)">
-      <label for="Sunday">Sunday</label><br><br>
+      <label for="Sunday">Sunday</label><br><br> -->
       
     
 
     
     </form>
     <script src="testButton.js"></script>
+    
+    <script>
+      function changeFunc(i) {
+        let code = '<p>Select the Days you want the reminder to recur on: </p>' +
+      '<input type="checkbox" id="Monday" name="Monday" value=false onClick="checkbox(id)">' +
+      '<label for="Monday"> Monday</label><br><br>' +
+      '<input type="checkbox" id="Tuesday" name="Tuesday" value=false onClick="checkbox(id)">' +
+      '<label for="Tuesday"> Tuesday</label><br><br>' +
+      '<input type="checkbox" id="Wednesday" name="Wednesday" value=false onClick="checkbox(id)">' +
+      '<label for="Wednesday">Wednesday</label><br><br>' +
+      '<input type="checkbox" id="Thursday" name="Thursday" value=false onClick="checkbox(id)">' +
+      '<label for="Thursday">Thursday</label><br><br>' +
+      '<input type="checkbox" id="Friday" name="Friday" value=false onClick="checkbox(id)">' +
+      '<label for="Friday">Friday</label><br><br>' +
+      '<input type="checkbox" id="Saturday" name="Saturday" value=false onClick="checkbox(id)">' +
+      '<label for="Saturday">Saturday</label><br><br>' +
+      '<input type="checkbox" id="Sunday" name="Sunday" value=false onClick="checkbox(id)">' +
+      '<label for="Sunday">Sunday</label><br><br>';
+
+        if (i == 'weekly') {
+          document.getElementById("main").innerHTML += code;
+        }
+        
+      }
+    </script>
 
 
     <input type="submit" value="Submit" id="Submit Button" onClick="addButton()">
