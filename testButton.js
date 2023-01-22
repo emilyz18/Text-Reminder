@@ -41,7 +41,12 @@ function convertToJSON(keys, values) {
 
 
 function checkbox(p){
-    document.getElementById(p).value = true
+  if (document.getElementById(p).value == "false") {
+    document.getElementById(p).value = true;
+  } else {
+    document.getElementById(p).value = false;
+  }
+    
 }
 
 function changeFunc(i) {
