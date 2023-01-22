@@ -6,7 +6,7 @@ function addButton() {
         var notificationTime = document.getElementById("Notification Time").value
         var content = document.getElementById("Content").value
         const rtArray = [phoneNumber, time, notificationTime, content]
-        return rtArray
+        console.log(rtArray)
     })
 
 }
