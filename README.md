@@ -31,3 +31,8 @@ You will be provided a simple GUI with a few options:
 If you select a recurring reminder, you will also have a "recurrence frequency" option. When the recurrence is set to be based on the number of days, this controls how many days are between each reminder. 1 is every day, 2 is every other day, 3 is every third day, etc. When the recurrence is set to be based on weeks, this controls how many weeks are between each reminder instead.
 
 Additionally, if the recurrence is set to be based on weeks, you can check or uncheck individual days. In the weeks where the reminder occurs, it occurs on every day that is checked in the interface.
+
+## Demo
+
+<img width="650" alt="image" src="https://user-images.githubusercontent.com/105086688/213934891-de61c33b-6fb0-46da-9053-b470eb61cacc.png">
+![image](https://user-images.githubusercontent.com/105086688/213934907-44cb00d5-a653-44ca-8763-c478cd26f410.png)
