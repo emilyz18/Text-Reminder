@@ -1,108 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
 <div id="center">
-<style>
-  section{
-    width: 100%;
-    position: relative;
-}
-
-#center{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-</style>
-<section>
-<head>  
-  <link rel="stylesheet" href="style.css">
-
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Text Reminder</title>
   <style>
-    .hidden {
-      display: none;
+    section {
+      width: 100%;
+      position: relative;
+    }
+
+    #center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
   </style>
-</head>
+  <section>
 
-<body>
-  <h1>Text Reminder</h1>
+    <head>
+      <link rel="stylesheet" href="style.css">
 
-    <form id="main" action="http://localhost:8080" method="POST">
-      <label for="number">Enter Your Phone Number: </label>
-      <input type="number" id="Phone Number" name="number" minlength="10" maxlength="10"
-        onchange="validatePhoneNumber()"><br><br>
-      <label id="phoneNumberError"></label><br>
-      <label for="content">Enter the content of your Reminder: </label>
-
-
-      <!-- <input type="text" id="Content" name="content"><br><br> -->
-      <textarea id = "Content" rows="5" cols="60" name="text" placeholder="Enter text"></textarea> <br><br>
-
-
-
-      <label for="datetime">Enter Date and Time: </label>
-      <input type="datetime-local" id="Time" name="datetime"><br><br>
-      <label for="recurDays"></label>
-      <label for="Recurrence Dropdown">Select reccurence: </label>
-      <select name="recurences" id="Recurence Dropdown" onchange="recurrenceChange(value)">
-        <option value="once">once</option>
-        <option value="daily">daily</option>
-        <option value="weekly">weekly</option>
-      </select> <br> <br>
-    
-      <script>
-        function validatePhoneNumber() {
-          var phoneNumber = document.getElementById("Phone Number").value;
-          var phoneNumberError = document.getElementById("phoneNumberError");
-          var phoneNumberRegex = /^[0-9]{3}[0-9]{3}[0-9]{4}$/;
-          if (!phoneNumberRegex.test(phoneNumber)) {
-            phoneNumberError.innerHTML = "Invalid phone number format. Please enter a 10-digit phone number.";
-          } else {
-            phoneNumberError.innerHTML = "";
-          }
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Text Reminder</title>
+      <style>
+        .hidden {
+          display: none;
         }
-      </script>
+      </style>
+    </head>
+
+    <body>
+      <h1>Text Reminder</h1>
+
+      <form id="main" action="http://localhost:8080" method="POST">
+        <label for="number">Enter Your Phone Number: </label>
+        <input type="number" id="Phone Number" name="number" minlength="10" maxlength="10"
+          onchange="validatePhoneNumber()"><br><br>
+        <label id="phoneNumberError"></label><br>
+        <label for="content">Enter the content of your Reminder: </label><br>
+
+
+        <!-- <input type="text" id="Content" name="content"><br><br> -->
+        <textarea id="Content" rows="5" cols="60" name="text" placeholder="Enter text"></textarea> <br><br>
 
 
 
-    <div id="daysblock">
-      <p>Select the Days you want the reminder to recur on: </p>
-      <input type="checkbox" id="Monday" name="Monday">
-      <label for="Monday"> Monday</label><br><br>
-      <input type="checkbox" id="Tuesday" name="Tuesday">
-      <label for="Tuesday"> Tuesday</label><br><br>
-      <input type="checkbox" id="Wednesday" name="Wednesday">
-      <label for="Wednesday">Wednesday</label><br><br>
-      <input type="checkbox" id="Thursday" name="Thursday">
-      <label for="Thursday">Thursday</label><br><br>
-      <input type="checkbox" id="Friday" name="Friday">
-      <label for="Friday">Friday</label><br><br>
-      <input type="checkbox" id="Saturday" name="Saturday">
-      <label for="Saturday">Saturday</label><br><br>
-      <input type="checkbox" id="Sunday" name="Sunday">
-      <label for="Sunday">Sunday</label><br><br>
-    </div>
+        <label for="datetime">Enter Date and Time: </label>
+        <input type="datetime-local" id="Time" name="datetime"><br><br>
+        <label for="recurDays"></label>
+        <label for="Recurrence Dropdown">Select reccurence: </label>
+        <select name="recurences" id="Recurence Dropdown" onchange="recurrenceChange(value)">
+          <option value="once">once</option>
+          <option value="daily">daily</option>
+          <option value="weekly">weekly</option>
+        </select> <br> <br>
 
-    <div id="freqblock">
-      <label for="Recurrence frequency">Select recurence frequency: </label>
-      <input type="number" id="recurence frequency" name="recurence frequency" value="1"><br></br>
-    </div>
-  </form>
-
-  <script src="testButton.js"></script>
+        <script>
+          function validatePhoneNumber() {
+            var phoneNumber = document.getElementById("Phone Number").value;
+            var phoneNumberError = document.getElementById("phoneNumberError");
+            var phoneNumberRegex = /^[0-9]{3}[0-9]{3}[0-9]{4}$/;
+            if (!phoneNumberRegex.test(phoneNumber)) {
+              phoneNumberError.innerHTML = "Invalid phone number format. Please enter a 10-digit phone number.";
+            } else {
+              phoneNumberError.innerHTML = "";
+            }
+          }
+        </script>
 
 
-  <input type="submit" value="Submit" id="Submit Button" onClick="submit()">
-  <label for="error" id="error"> </label>
+
+        <div id="daysblock">
+          <p>Select the Days you want the reminder to recur on: </p>
+          <input type="checkbox" id="Monday" name="Monday">
+          <label for="Monday"> Monday</label><br><br>
+          <input type="checkbox" id="Tuesday" name="Tuesday">
+          <label for="Tuesday"> Tuesday</label><br><br>
+          <input type="checkbox" id="Wednesday" name="Wednesday">
+          <label for="Wednesday">Wednesday</label><br><br>
+          <input type="checkbox" id="Thursday" name="Thursday">
+          <label for="Thursday">Thursday</label><br><br>
+          <input type="checkbox" id="Friday" name="Friday">
+          <label for="Friday">Friday</label><br><br>
+          <input type="checkbox" id="Saturday" name="Saturday">
+          <label for="Saturday">Saturday</label><br><br>
+          <input type="checkbox" id="Sunday" name="Sunday">
+          <label for="Sunday">Sunday</label><br><br>
+        </div>
+
+        <div id="freqblock">
+          <label for="Recurrence frequency">Select recurence frequency: </label>
+          <input type="number" id="recurence frequency" name="recurence frequency" value="1" min="1" step="1"
+            onkeyup="this.value = '' + parseInt(Math.abs(this.value))"><br></br>
+        </div>
+      </form>
+
+      <script src="testButton.js"></script>
 
 
-  </form>
-</body>
+      <input type="submit" value="Submit" id="Submit Button" onClick="submit()">
+      <label for="error" id="error"> </label>
+
+
+      </form>
+    </body>
 </div>
 </section>
 
