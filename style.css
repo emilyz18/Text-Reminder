@@ -95,11 +95,11 @@ input[type=submit] {
 body {
   width: 100%;
   height: 100vh;
-  background: linear-gradient(to top,
+  /* background: linear-gradient(to top,
       rgb(145, 169, 114) 0%,
       rgb(227, 232, 213) 82%,
       rgb(184, 193, 155) 50%,
-      rgb(133, 176, 176) 100%);
+      rgb(133, 176, 176) 100%); */
 }
 
 form {
