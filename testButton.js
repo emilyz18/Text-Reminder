@@ -1,13 +1,12 @@
+var mainArr = []
+
 function addButton() {
-  alert('test')
   document.getElementById("error").innerText = ""
   var phoneNumber = document.getElementById("Phone Number").value;
   var time = document.getElementById("Time").value;
-  var notificationTime = document.getElementById("Notification Time").value;
   var content = document.getElementById("Content").value;
   var phoneNumber = document.getElementById("Phone Number").value
-  var time = document.getElementById("Time").vallue
-  var notificationTime = document.getElementById("Notification Time").value
+  var time = document.getElementById("Time").value
   var content = document.getElementById("Content").value
   if (document.getElementById("daysblock") != null) {
     var recurDays = [document.getElementById("Monday").value,
@@ -18,9 +17,9 @@ function addButton() {
     document.getElementById("Saturday").value,
     document.getElementById("Sunday").value]
     const allEqual = recurDays.every(v => v == "false")
-    console.log(allEqual)
+    //  console.log(allEqual)
     if (allEqual && text == 'weekly') {
-      console.log("success")
+      // console.log("success")
       document.getElementById("error").innerText = "must select at least one"
 
     } else {
@@ -30,7 +29,7 @@ function addButton() {
   var id = document.getElementById("Recurence Dropdown")
 
   var text = id.options[id.selectedIndex].text;
-  console.log(text);
+  // console.log(text);
 
   let hr = "";
   let min = "";
@@ -45,11 +44,11 @@ function addButton() {
     month = date[1];
     day = date[2];
 
-    console.log(year);
-    console.log(month);
-    console.log(day);
+    // console.log(year);
+    // console.log(month);
+    // console.log(day);
 
-    console.log(date);
+    // console.log(date);
     let hrmin = timeSplit[1].split(":");
     hr = hrmin[0];
     min = hrmin[1];
@@ -58,13 +57,25 @@ function addButton() {
 
 
 
-  const rtArray = [content, phoneNumber, hr, min, month, day, year, notificationTime, , recurDays]
+  const rtArray = [content, phoneNumber, hr, min, month, day, year, recurDays]
 
   // Convert array to JSON format
-  const keys = ["content", "phoneNumber", "hour", "minute", "month", "day", "year", "notificationTime", "recurDays"];
+  const keys = ["content", "phoneNumber", "hour", "minute", "month", "day", "year", "recurDays"];
   let jsonObj = convertToJSON(keys, rtArray);
 
-  console.log(jsonObj);
+  mainArr.push(jsonObj)
+  // console.log(mainArr)
+
+
+  var i = 0
+
+  let randString = makeid(20).toString();
+  let newjsonObj = (convertToJSON([randString], mainArr));
+  i += 1
+  console.log(randString);
+  console.log(newjsonObj);
+
+  // console.log(jsonObj);
 }
 
 
@@ -72,12 +83,22 @@ function addButton() {
 function convertToJSON(keys, values) {
   let jsonObj = {};
 
-  values.map((elem, index) => {
-    let key = keys[index];
-    return jsonObj[key] = elem;
-  })
+  if (typeof keys == String) {
+    values.map((elem) => {
+      return jsonObj[keys] = elem;
+    })
 
-  jsonObj = JSON.stringify(jsonObj);
+  } else {
+    values.map((elem, index) => {
+      let key = keys[index];
+      return jsonObj[key] = elem;
+    })
+  }
+
+
+
+
+  jsonObj = JSON.stringify(jsonObj).replace(/\\/g, "");
 
   return jsonObj;
 }
@@ -121,3 +142,15 @@ function changeFunc(i) {
   }
 
 }
+
+function makeid(length) {
+  var result = '';
+  var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  var charactersLength = characters.length;
+  for (var i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+}
+
+// console.log(makeid(5));
