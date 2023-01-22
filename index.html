@@ -6,6 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Text Reminder</title>
+  <style>
+    .hidden {
+      display: none;
+    }
+  </style>
 </head>
 
 <body>
@@ -20,26 +25,41 @@
     <label for="recurDays"></label>
 
     <label for="Recurrence Dropdown">Select reccurence: </label>
-    <select name="recurences" id="Recurence Dropdown" onchange="changeFunc(value)">
+    <select name="recurences" id="Recurence Dropdown" onchange="recurrenceChange(value)">
       <option value="once">once</option>
       <option value="daily">daily</option>
       <option value="weekly">weekly</option>
     </select> <br> <br>
 
 
-    <label for="Recurrence frequency">Select recurence frequency: </label>
-    <input type="number" id="recurence frequency" name="recurence frequency"><br><br>
+    <div id="daysblock">
+      <p>Select the Days you want the reminder to recur on: </p>
+      <input type="checkbox" id="Monday" name="Monday" value=false">
+      <label for="Monday"> Monday</label><br><br>
+      <input type="checkbox" id="Tuesday" name="Tuesday" value=false>
+      <label for="Tuesday"> Tuesday</label><br><br>
+      <input type="checkbox" id="Wednesday" name="Wednesday" value=false>
+      <label for="Wednesday">Wednesday</label><br><br>
+      <input type="checkbox" id="Thursday" name="Thursday" value=false>
+      <label for="Thursday">Thursday</label><br><br>
+      <input type="checkbox" id="Friday" name="Friday" value=false>
+      <label for="Friday">Friday</label><br><br>
+      <input type="checkbox" id="Saturday" name="Saturday" value=false>
+      <label for="Saturday">Saturday</label><br><br>
+      <input type="checkbox" id="Sunday" name="Sunday" value=false>
+      <label for="Sunday">Sunday</label><br><br>
+    </div>
 
-
-
-
-
-
+    <div id="freqblock">
+      <label for="Recurrence frequency">Select recurence frequency: </label>
+      <input type="number" id="recurence frequency" name="recurence frequency" value="1"><br></br>
+    </div>
   </form>
+
   <script src="testButton.js"></script>
 
 
-  <input type="submit" value="Submit" id="Submit Button" onClick="addButton()">
+  <input type="submit" value="Submit" id="Submit Button" onClick="submit()">
   <label for="error" id="error"> </label>
 
 

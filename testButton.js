@@ -1,40 +1,6 @@
-function addButton() {
-  document.getElementById("error").innerText = ""
-  var phoneNumber = document.getElementById("Phone Number").value;
+function submit() {
+  const errorField = document.getElementById('error');
   var time = document.getElementById("Time").value;
-  var content = document.getElementById("Content").value;
-  if (document.getElementById("daysblock") != null) {
-    var recurDays = [document.getElementById("Monday").value,
-    document.getElementById("Tuesday").value,
-    document.getElementById("Wednesday").value,
-    document.getElementById("Thursday").value,
-    document.getElementById("Friday").value,
-    document.getElementById("Saturday").value,
-    document.getElementById("Sunday").value]
-  const allEqual = recurDays.every(v => v == "false")
-  var id = document.getElementById("Recurence Dropdown")
-
-  var text = id.options[id.selectedIndex].text;
-
-     console.log(allEqual)
-     console.log(text)
-
-
-    if (allEqual && text == 'weekly') {
-      document.getElementById("error").innerText = "please select at least one day"
-
-    } else {
-      document.getElementById("error").innerText = ""
-    }
-  }
-
-  // var text = id.options[id.selectedIndex].text;
-  // console.log(text);
-  if (recurFreq == null) {
-    recurFreq = ''
-  } else {
-    var recurFreq = document.getElementById("recurence frequency").value;
-  }
 
   let hr = "";
   let min = "";
@@ -49,130 +15,77 @@ function addButton() {
     month = date[1];
     day = date[2];
 
-    // console.log(year);
-    // console.log(month);
-    // console.log(day);
-
-    // console.log(date);
     let hrmin = timeSplit[1].split(":");
     hr = hrmin[0];
     min = hrmin[1];
-
   }
 
-  let randString = makeid(20).toString();
+  function strToBool(str) {
+    return str == "true";
+  }
+
+  recurrence = document.getElementById("Recurence Dropdown").value;
+  recurDays = [
+    strToBool(document.getElementById("Sunday").value),
+    strToBool(document.getElementById("Monday").value),
+    strToBool(document.getElementById("Tuesday").value),
+    strToBool(document.getElementById("Wednesday").value),
+    strToBool(document.getElementById("Thursday").value),
+    strToBool(document.getElementById("Friday").value),
+    strToBool(document.getElementById("Saturday").value)
+  ];
+
   let newjsonObj = {
-    [randString]: {
-      'message': content,
-      'phone': phoneNumber,
+    [makeid(20).toString()]: {
+      'message': document.getElementById("Content").value,
+      'phone': document.getElementById("Phone Number").value,
       'hour': hr,
       'minute': min,
       'month': month,
       'date': day,
       'year': year,
-      "recurrence": text,
-      "recurFreq": recurFreq,
+      "recurrence": recurrence,
+      "recurFreq": document.getElementById("recurence frequency").value,
       'recurDays': recurDays
     }
   }
 
-  // console.log(mainArr)
-
-
-  // console.log(randString);
-  console.log(JSON.stringify(newjsonObj));
-
-  // console.log(jsonObj);
-}
-
-
-
-// function convertToJSON(keys, values) {
-//   let jsonObj = {};
-
-//   if (typeof keys == String) {
-//     values.map((elem) => {
-//       return jsonObj[keys] = elem;
-//     })
-
-//   } else {
-//     values.map((elem, index) => {
-//       let key = keys[index];
-//       return jsonObj[key] = elem;
-//     })
-//   }
-
-
-
-
-//   jsonObj = JSON.stringify(jsonObj).replace(/\\/g, "");
-
-//   return jsonObj;
-// }
-
-
-function checkbox(p) {
-  if (document.getElementById(p).value == "false") {
-    document.getElementById(p).value = true;
+  if (recurrence == 'weekly' && recurDays.indexOf(true) == -1) {
+    errorField.innerText = "please select at least one day"
   } else {
-    document.getElementById(p).value = false;
+    // Send the data to the server
+    console.log(JSON.stringify(newjsonObj))
+    let xhr = new XMLHttpRequest;
+    xhr.onerror = event => {
+      errorField.innerText = 'Failed to send data to server'
+    }
+    xhr.onload = event => {
+      if (xhr.status == 204) errorField.innerText = ''
+      else if (xhr.status == 400) errorField.innerText = 'Invalid settings rejected by server'
+      else if (xhr.status >= 500) errorField.innerText = `Server error ${xhr.status}`
+      else errorField.innerText = `Unknown status code ${xhr.status}`
+    }
+
+    xhr.open('POST', 'http://localhost:8080', true);
+    xhr.send(JSON.stringify(newjsonObj));
   }
 }
 
-function changeFunc(i) {
-  let code = '<div id = "daysblock">' +
-    '<p>Select the Days you want the reminder to recur on: </p>' +
-    '<input type="checkbox" id="Monday" name="Monday" value=false onClick="checkbox(id)">' +
-    '<label for="Monday"> Monday</label><br><br>' +
-    '<input type="checkbox" id="Tuesday" name="Tuesday" value=false onClick="checkbox(id)">' +
-    '<label for="Tuesday"> Tuesday</label><br><br>' +
-    '<input type="checkbox" id="Wednesday" name="Wednesday" value=false onClick="checkbox(id)">' +
-    '<label for="Wednesday">Wednesday</label><br><br>' +
-    '<input type="checkbox" id="Thursday" name="Thursday" value=false onClick="checkbox(id)">' +
-    '<label for="Thursday">Thursday</label><br><br>' +
-    '<input type="checkbox" id="Friday" name="Friday" value=false onClick="checkbox(id)">' +
-    '<label for="Friday">Friday</label><br><br>' +
-    '<input type="checkbox" id="Saturday" name="Saturday" value=false onClick="checkbox(id)">' +
-    '<label for="Saturday">Saturday</label><br><br>' +
-    '<input type="checkbox" id="Sunday" name="Sunday" value=false onClick="checkbox(id)">' +
-    '<label for="Sunday">Sunday</label><br><br>' +
-    '</div>';
-
-    let freqCode = '<div id = "freqblock">' + 
-    '<label for="Recurrence frequency">Select recurence frequency: </label>' + 
-    '<input type="number" id="recurence frequency" name="recurence frequency"><br></br>' +
-    '</div>'
-
-
-    if (i == 'weekly') {
-      document.getElementById("main").innerHTML += code;
-      document.getElementById("Recurence Dropdown").value = "weekly";
-    } else {
-      if ((document.getElementById("daysblock")) != null) {
-        document.getElementById("daysblock").remove();
-      }
-  
-      if ((document.getElementById("freqblock")) != null) {
-        document.getElementById("freqblock").remove();
-      }
-    }
-  
-    if (i == 'daily' || i == 'weekly') {
-      // alert('here')
-      document.getElementById("main").innerHTML += freqCode;
-      document.getElementById("Recurence Dropdown").value = i;
-    } else {
-      if ((document.getElementById("freqblock")) != null) {
-        document.getElementById("freqblock").remove();
-      }
-
-      if ((document.getElementById("daysblock")) != null) {
-        document.getElementById("daysblock").remove();
-      }
-    }
-
-
+function recurrenceChange(value) {
+  daysblock = document.getElementById('daysblock');
+  freqblock = document.getElementById('freqblock');
+  if (value == 'once') {
+    daysblock.classList.add('hidden');
+    freqblock.classList.add('hidden');
+  } else if (value == 'daily') {
+    daysblock.classList.add('hidden');
+    freqblock.classList.remove('hidden');
+  } else if (value == 'weekly') {
+    daysblock.classList.remove('hidden');
+    freqblock.classList.remove('hidden');
+  }
 }
+recurrenceChange(document.getElementById("Recurence Dropdown").value);
 
 function makeid(length) {
   var result = '';
@@ -183,5 +96,3 @@ function makeid(length) {
   }
   return result;
 }
-
-// console.log(makeid(5));
