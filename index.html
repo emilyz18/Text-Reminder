@@ -16,6 +16,8 @@
 </style>
 <section>
 <head>  
+  <link rel="stylesheet" href="style.css">
+
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,11 +34,17 @@
 
     <form id="main" action="http://localhost:8080" method="POST">
       <label for="number">Enter Your Phone Number: </label>
-      <input type="text" id="Phone Number" name="number" minlength="10" maxlength="10"
+      <input type="number" id="Phone Number" name="number" minlength="10" maxlength="10"
         onchange="validatePhoneNumber()"><br><br>
       <label id="phoneNumberError"></label><br>
       <label for="content">Enter the content of your Reminder: </label>
-      <input type="text" id="Content" name="content"><br><br>
+
+
+      <!-- <input type="text" id="Content" name="content"><br><br> -->
+      <textarea id = "Content" rows="5" cols="60" name="text" placeholder="Enter text"></textarea> <br><br>
+
+
+
       <label for="datetime">Enter Date and Time: </label>
       <input type="datetime-local" id="Time" name="datetime"><br><br>
       <label for="recurDays"></label>
