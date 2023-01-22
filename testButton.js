@@ -23,6 +23,9 @@ function addButton() {
 
   var text = id.options[id.selectedIndex].text;
 
+  var recurFreq = document.getElementById("recurence frequency").value;
+
+
   let hr = "";
   let min = "";
   let month = "";
@@ -52,6 +55,8 @@ function addButton() {
       'month': month,
       'day': day,
       'year': year,
+      "recurrence": text,
+      "recurFreq": recurFreq,
       'recurDays': recurDays
     }
   }
