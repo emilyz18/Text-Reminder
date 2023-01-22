@@ -34,3 +34,55 @@ Only needs to be defined if `recurrence` is set to `daily` or `weekly`. Is an in
 
 ## recurDays
 Only needs to be defined if `recurrence` is set to `weekly`. It is an object consisting of an array of 7 booleans, where each boolean represents whether to send a reminder on a day of the week starting from Sunday. For example, to send a reminder on Monday, Wednesday, and Friday, this should be `[false, true, false, true, false, true, false]`.
+
+# Example reminders.json
+
+This is an example reminders.json file, for sending reminders to a made-up phone number to wake up at 8 AM every day (starting on january 1, 2023), take out the trash on Wednesday at 7:30 PM every other week (starting on january 4), and attend MATH 302 at 11 AM on Monday, Wednesday, and Friday starting on January 11, and to start hacking on January 21 at 12 PM.
+
+    {
+        "A5KDeAE3kW49G9GwBbZhtj23gBtZ3Eym":{
+            "message": "Wake up!",
+            "phone": "15555555555",
+            "hour": 8,
+            "minute": 0,
+            "month": 1,
+            "date": 1,
+            "year": 2023,
+            "recurrence": "daily",
+            "recurFreq": 1
+        },
+        "8HvBFf1T7YCCbOyuaKRfVAhruZm2yY5L":{
+            "message": "Take out trash",
+            "phone": "15555555555",
+            "hour": 19,
+            "minute": 30,
+            "month": 1,
+            "date": 4,
+            "year": 2023,
+            "recurrence": "weekly",
+            "recurFreq": 2,
+            "recurDays": [false, false, false, true, false, false, false]
+        },
+        "tb42O8m0ZK3Yl1M245P1ZR0ILgNQFkC8":{
+            "message": "Attend MATH 302",
+            "phone": "15555555555",
+            "hour": 11,
+            "minute": 0,
+            "month": 1,
+            "date": 11,
+            "year": 2023,
+            "recurrence": "weekly",
+            "recurFreq": 1,
+            "recurDays": [false, true, false, true, false, true, false]
+        },
+        "e33BFHs4NWRqPiZFFVYPSYLrKZeuuSCf": {
+            "message": "Start hacking",
+            "phone": "15555555555",
+            "hour": 12,
+            "minute": 0,
+            "month": 1,
+            "date": 21,
+            "year": 2023,
+            "recurrence": "once"
+        }
+    }
