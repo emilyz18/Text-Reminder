@@ -1,6 +1,7 @@
 # Text-Reminder
 
 Project created for [NWHacks](https://www.nwhacks.io/) 2023. A program to send SMS reminders at a scheduled time.
+Created by: Bruce Blore, Swapnil Dubey, Alice Low, Emily Zhang
 
 ## Setup
 For now, this program only works without modification on systems where the Python binary is at `/usr/bin/python`, and this binary is Python 3. I know that Arch Linux works, but others are less certain. Install the Python Twilio API module. Run `pip install twilio`. On Arch-based systems, you can also install the `python-twilio` package from the AUR.
