@@ -2,11 +2,9 @@ function addButton() {
     document.getElementById("error").innerText = ""
     var phoneNumber = document.getElementById("Phone Number").value;
     var time = document.getElementById("Time").value;
-    var notificationTime = document.getElementById("Notification Time").value;
     var content = document.getElementById("Content").value;
     var phoneNumber = document.getElementById("Phone Number").value
     var time = document.getElementById("Time").value
-    var notificationTime = document.getElementById("Notification Time").value
     var content = document.getElementById("Content").value
     if (document.getElementById("daysblock") != null) {var recurDays = [document.getElementById("Monday").value,
                      document.getElementById("Tuesday").value,
@@ -54,10 +52,10 @@ function addButton() {
 
    
 
-    const rtArray = [content, phoneNumber, hr, min, month, day, year, notificationTime, , recurDays]
+    const rtArray = [content, phoneNumber, hr, min, month, day, year, recurDays]
 
     // Convert array to JSON format
-    const keys = ["content", "phoneNumber", "hour", "minute", "month", "day", "year", "notificationTime", "recurDays"];
+    const keys = ["content", "phoneNumber", "hour", "minute", "month", "day", "year", "recurDays"];
     let jsonObj = convertToJSON(keys, rtArray);
     
     console.log(jsonObj);
