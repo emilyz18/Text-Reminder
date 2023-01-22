@@ -20,6 +20,14 @@
       <label for="Notification Time">Notification Time: </label>
       <input type="time" id="Notification Time" name="Notification Time"><br><br>
       <label for="recurDays"></label>
+      
+       <label for="Recurrence Dropdown">Select reccurence: </label>
+      <select name="recurences" id="Recurence Dropdown">
+        <option value="once">once</option>
+        <option value="daily">daily</option>
+        <option value="weekly">weekly</option>
+      </select> <br> <br>
+      
       <!-- show only if recurrence is set to weekly-->
       <p>Select the Days you want the reminder to recur on: </p>
       <input type="checkbox" id="Monday" name="Monday" value=false onClick="checkbox(id)">
@@ -36,6 +44,9 @@
       <label for="Saturday">Saturday</label><br><br>
       <input type="checkbox" id="Sunday" name="Sunday" value=false onClick="checkbox(id)">
       <label for="Sunday">Sunday</label><br><br>
+      
+    
+
     
     </form>
     <script src="testButton.js"></script>
