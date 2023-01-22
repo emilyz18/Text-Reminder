@@ -17,40 +17,23 @@
     <form id="main" action="http://localhost:8080" method="POST">
       <label for="number">Enter Your Phone Number: </label>
       <input type="number" id="Phone Number" name="number" minlength="10" maxlength="10"
-        onchange="validatePhoneNumber()"><br><br>
-      <label id="phoneNumberError"></label><br>
-      <label for="content">Enter the content of your Reminder: </label><br>
+        onchange="validatePhoneNumber()">
+      <label id="phoneNumberError"></label>
 
-
-      <!-- <input type="text" id="Content" name="content"><br><br> -->
-      <textarea id="Content" rows="5" cols="60" name="text" placeholder="Enter text"></textarea> <br><br>
+      <label for="content">Enter the content of your Reminder: </label>
+      <textarea id="Content" rows="5" cols="60" name="text" placeholder="Enter text"></textarea>
 
 
 
       <label for="datetime">Enter Date and Time: </label>
-      <input type="datetime-local" id="Time" name="datetime"><br><br>
-      <label for="recurDays"></label>
+      <input type="datetime-local" id="Time" name="datetime">
+
       <label for="Recurrence Dropdown">Select reccurence: </label>
       <select name="recurences" id="Recurence Dropdown" onchange="recurrenceChange(value)">
         <option value="once">once</option>
         <option value="daily">daily</option>
         <option value="weekly">weekly</option>
-      </select> <br> <br>
-
-      <script>
-        function validatePhoneNumber() {
-          var phoneNumber = document.getElementById("Phone Number").value;
-          var phoneNumberError = document.getElementById("phoneNumberError");
-          var phoneNumberRegex = /^[0-9]{3}[0-9]{3}[0-9]{4}$/;
-          if (!phoneNumberRegex.test(phoneNumber)) {
-            phoneNumberError.innerHTML = "Invalid phone number format. Please enter a 10-digit phone number.";
-          } else {
-            phoneNumberError.innerHTML = "";
-          }
-        }
-      </script>
-
-
+      </select>
 
       <div id="daysblock">
         <p>Select the Days you want the reminder to recur on: </p>
@@ -77,15 +60,22 @@
       </div>
     </form>
 
-    <script src="testButton.js"></script>
-
-
     <input type="submit" value="Submit" id="Submit Button" onClick="submit()">
     <label for="error" id="error"> </label>
-
-
-    </form>
   </div>
+  <script>
+    function validatePhoneNumber() {
+      var phoneNumber = document.getElementById("Phone Number").value;
+      var phoneNumberError = document.getElementById("phoneNumberError");
+      var phoneNumberRegex = /^[0-9]{3}[0-9]{3}[0-9]{4}$/;
+      if (!phoneNumberRegex.test(phoneNumber)) {
+        phoneNumberError.innerHTML = "Invalid phone number format. Please enter a 10-digit phone number.";
+      } else {
+        phoneNumberError.innerHTML = "";
+      }
+    }
+  </script>
+  <script src="testButton.js"></script>
 </body>
 
 </html>
