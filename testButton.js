@@ -8,34 +8,56 @@ function addButton() {
     var time = document.getElementById("Time").value
     var notificationTime = document.getElementById("Notification Time").value
     var content = document.getElementById("Content").value
-    var recurDays = [document.getElementById("Monday").value,
+    if (document.getElementById("daysblock") != null) {var recurDays = [document.getElementById("Monday").value,
                      document.getElementById("Tuesday").value,
                      document.getElementById("Wednesday").value,
                      document.getElementById("Thursday").value,
                      document.getElementById("Friday").value,
                      document.getElementById("Saturday").value,
                      document.getElementById("Sunday").value]
-    const allEqual = recurDays.every( v => v == "false")
+                     const allEqual = recurDays.every( v => v == "false")
                      console.log(allEqual)
-    var id = document.getElementById("Recurence Dropdown")
-
-    var text = id.options[id.selectedIndex].text;
-    console.log(text)
-
-    if (allEqual && text == 'weekly') {
+                    if (allEqual && text == 'weekly') {
         console.log("success")
-        recurDays = []
         document.getElementById("error").innerText = "must select at least one"
         
     } else {
-        document.getElementById("error").innerText = ""
+        document.getElementById("error").innerText = ""}}
+    var id = document.getElementById("Recurence Dropdown")
 
-}
+    var text = id.options[id.selectedIndex].text;
+    console.log(text);
 
-    const rtArray = [phoneNumber, time, notificationTime, content, recurDays]
+    let hr = "";
+    let min = "";
+    let month = "";
+    let day = "";
+    let year = "";
+
+    if (time) {
+      let timeSplit = time.split("T");
+      let date = timeSplit[0].split("-");
+      year = date[0];
+      month = date[1];
+      day = date[2];
+  
+      console.log(year);
+      console.log(month);
+      console.log(day);
+  
+      console.log(date);
+      let hrmin = timeSplit[1].split(":");
+      hr = hrmin[0];
+      min = hrmin[1];
+
+    }
+
+   
+
+    const rtArray = [content, phoneNumber, hr, min, month, day, year, notificationTime, , recurDays]
 
     // Convert array to JSON format
-    const keys = ["phoneNumber", "time", "notificationTime", "content", "recurDays"]
+    const keys = ["content", "phoneNumber", "hour", "minute", "month", "day", "year", "notificationTime", "recurDays"];
     let jsonObj = convertToJSON(keys, rtArray);
     
     console.log(jsonObj);
