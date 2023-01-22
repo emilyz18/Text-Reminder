@@ -33,10 +33,13 @@ If you select a recurring reminder, you will also have a "recurrence frequency" 
 Additionally, if the recurrence is set to be based on weeks, you can check or uncheck individual days. In the weeks where the reminder occurs, it occurs on every day that is checked in the interface.
 
 ## Demo
-### Website: 
-<img align = "left" width="400" height = "300" alt="Screenshot 2023-01-22 at 11 08 40 AM" src="https://user-images.githubusercontent.com/68439730/213935077-d9c5d16c-cea8-4c17-8738-58d8d5d4fa8f.png">
-
-### Text Reminder:
-<img align = "right" width="300" height = "600" src="https://user-images.githubusercontent.com/68439730/213935376-3f7dad7b-ab5f-424b-a6a3-8c537712aa9e.jpg">
-
-
+<table>
+  <tr>
+    <td>Website</td>
+     <td>Text Reminder</td>
+  </tr>
+  <tr>
+    <td><img src="https://user-images.githubusercontent.com/68439730/213935077-d9c5d16c-cea8-4c17-8738-58d8d5d4fa8f.png" width=270 height=480></td>
+    <td><img src="https://user-images.githubusercontent.com/68439730/213935376-3f7dad7b-ab5f-424b-a6a3-8c537712aa9e.jpg" width=270 height=480></td>
+  </tr>
+ </table>
