@@ -21,7 +21,7 @@ function addButton() {
 
 
     if (allEqual && text == 'weekly') {
-      document.getElementById("error").innerText = "must select at least one"
+      document.getElementById("error").innerText = "please select at least one day"
 
     } else {
       document.getElementById("error").innerText = ""
@@ -30,9 +30,11 @@ function addButton() {
 
   // var text = id.options[id.selectedIndex].text;
   // console.log(text);
-
-  var recurFreq = document.getElementById("recurence frequency").value;
-
+  if (recurFreq == null) {
+    recurFreq = ''
+  } else {
+    var recurFreq = document.getElementById("recurence frequency").value;
+  }
 
   let hr = "";
   let min = "";
@@ -78,7 +80,7 @@ function addButton() {
 
 
   // console.log(randString);
-  // console.log(JSON.stringify(newjsonObj));
+  console.log(JSON.stringify(newjsonObj));
 
   // console.log(jsonObj);
 }
@@ -136,15 +138,39 @@ function changeFunc(i) {
     '<label for="Sunday">Sunday</label><br><br>' +
     '</div>';
 
+    let freqCode = '<div id = "freqblock">' + 
+    '<label for="Recurrence frequency">Select recurence frequency: </label>' + 
+    '<input type="number" id="recurence frequency" name="recurence frequency"><br></br>' +
+    '</div>'
 
-  if (i == 'weekly') {
-    document.getElementById("main").innerHTML += code;
-    document.getElementById("Recurence Dropdown").value = "weekly";
-  } else {
-    if ((document.getElementById("daysblock")) != null) {
-      document.getElementById("daysblock").remove();
+
+    if (i == 'weekly') {
+      document.getElementById("main").innerHTML += code;
+      document.getElementById("Recurence Dropdown").value = "weekly";
+    } else {
+      if ((document.getElementById("daysblock")) != null) {
+        document.getElementById("daysblock").remove();
+      }
+  
+      if ((document.getElementById("freqblock")) != null) {
+        document.getElementById("freqblock").remove();
+      }
     }
-  }
+  
+    if (i == 'daily' || i == 'weekly') {
+      // alert('here')
+      document.getElementById("main").innerHTML += freqCode;
+      document.getElementById("Recurence Dropdown").value = i;
+    } else {
+      if ((document.getElementById("freqblock")) != null) {
+        document.getElementById("freqblock").remove();
+      }
+
+      if ((document.getElementById("daysblock")) != null) {
+        document.getElementById("daysblock").remove();
+      }
+    }
+
 
 }
 
