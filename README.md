@@ -34,7 +34,7 @@ Additionally, if the recurrence is set to be based on weeks, you can check or un
 
 ## Demo
 # Website: 
-<img width="100" height = "100" alt="Screenshot 2023-01-22 at 11 08 40 AM" src="https://user-images.githubusercontent.com/68439730/213935077-d9c5d16c-cea8-4c17-8738-58d8d5d4fa8f.png">
+<img width="500" height = "500" alt="Screenshot 2023-01-22 at 11 08 40 AM" src="https://user-images.githubusercontent.com/68439730/213935077-d9c5d16c-cea8-4c17-8738-58d8d5d4fa8f.png">
 # Text Reminder:
-<img src="https://your-image-url.type](https://user-images.githubusercontent.com/68439730/213935168-e2de47b6-11ae-45c8-b49d-3f9f193615a3.png)" width="100" height="100">
+<img width="500" height="500" src="https://your-image-url.type](https://user-images.githubusercontent.com/68439730/213935168-e2de47b6-11ae-45c8-b49d-3f9f193615a3.png)">
 
