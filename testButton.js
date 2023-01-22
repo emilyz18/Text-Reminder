@@ -35,20 +35,21 @@ function submit() {
     [makeid(20).toString()]: {
       'message': document.getElementById("Content").value,
       'phone': document.getElementById("Phone Number").value,
-      'hour': hr,
-      'minute': min,
-      'month': month,
-      'date': day,
-      'year': year,
+      'hour': parseInt(hr),
+      'minute': parseInt(min),
+      'month': parseInt(month),
+      'date': parseInt(day),
+      'year': parseInt(year),
       "recurrence": recurrence,
-      "recurFreq": document.getElementById("recurence frequency").value,
+      "recurFreq": parseInt(document.getElementById("recurence frequency").value),
       'recurDays': recurDays
     }
   }
 
   if (recurrence == 'weekly' && recurDays.indexOf(true) == -1) {
-    errorField.innerText = "please select at least one day"
+    errorField.innerText = "please select at least one day";
   } else {
+    errorField.innerText = '';
     // Send the data to the server
     console.log(JSON.stringify(newjsonObj))
     let xhr = new XMLHttpRequest;

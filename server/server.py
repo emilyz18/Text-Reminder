@@ -88,9 +88,10 @@ def serverApp(environ, start_response):
     reminder = json.JSONDecoder().decode(
         environ['wsgi.input'].read(bodySize).decode())
 
-    if validate(reminder):
-        reminderId = list(reminder.keys())[0]
-        reminderObj = reminder[reminderId]
+    reminderId = list(reminder.keys())[0]
+    reminderObj = reminder[reminderId]
+
+    if validate(reminderObj):
         reminders[reminderId] = reminderObj
 
         with open(REMINDER_CONFIG_FILE, 'w') as file:
