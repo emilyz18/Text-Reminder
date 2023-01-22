@@ -7,17 +7,8 @@ import calendar
 PORT = 8080  # Which port the server runs on
 REMINDER_CONFIG_FILE = 'reminders.json'  # Where to save the reminders
 
-try:
-    with open(REMINDER_CONFIG_FILE) as file:
-        reminders = json.JSONDecoder().decode(file.read())
-except:
-    reminders = {}
-
 
 def startTwilioProcess():
-    with open(REMINDER_CONFIG_FILE, 'w') as file:
-        file.write(json.JSONEncoder().encode(reminders))
-
     global twilioProcess
     twilioProcess = subprocess.Popen(
         [
@@ -92,12 +83,21 @@ def serverApp(environ, start_response):
     reminderObj = reminder[reminderId]
 
     if validate(reminderObj):
+        twilioProcess.kill()
+
+        # Load the existing reminders from storage to add to them
+        try:
+            with open(REMINDER_CONFIG_FILE) as file:
+                reminders = json.JSONDecoder().decode(file.read())
+        except:
+            reminders = {}
+
         reminders[reminderId] = reminderObj
 
+        # Save the reminders
         with open(REMINDER_CONFIG_FILE, 'w') as file:
             file.write(json.JSONEncoder().encode(reminders))
 
-        twilioProcess.kill()
         startTwilioProcess()
 
         start_response('204 No Content', [
