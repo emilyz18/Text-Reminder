@@ -8,28 +8,27 @@ function addButton() {
     var time = document.getElementById("Time").value
     var notificationTime = document.getElementById("Notification Time").value
     var content = document.getElementById("Content").value
-    var recurDays = [document.getElementById("Monday").value,
+    if (document.getElementById("daysblock") != null) {var recurDays = [document.getElementById("Monday").value,
                      document.getElementById("Tuesday").value,
                      document.getElementById("Wednesday").value,
                      document.getElementById("Thursday").value,
                      document.getElementById("Friday").value,
                      document.getElementById("Saturday").value,
                      document.getElementById("Sunday").value]
-    const allEqual = recurDays.every( v => v == "false")
+                     const allEqual = recurDays.every( v => v == "false")
                      console.log(allEqual)
+                    if (allEqual && text == 'weekly') {
+        console.log("success")
+        document.getElementById("error").innerText = "must select at least one"
+        
+    } else {
+        document.getElementById("error").innerText = ""}}
     var id = document.getElementById("Recurence Dropdown")
 
     var text = id.options[id.selectedIndex].text;
     console.log(text)
 
-    if (allEqual && text == 'weekly') {
-        console.log("success")
-        document.getElementById("error").innerText = "must select at least one"
-        
-    } else {
-        document.getElementById("error").innerText = ""
-
-}
+    
 
     const rtArray = [phoneNumber, time, notificationTime, content, recurDays]
 
