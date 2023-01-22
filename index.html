@@ -10,33 +10,34 @@
 
 <body>
   <h1>Text Reminder</h1>
-    <form id="main">
-      <label for="number">Enter Your Phone Number: </label>
-      <input type="text" id="Phone Number" name="number"><br><br>
-      <label for="content">Enter the content of your Reminder: </label>
-      <input type="text" id="Content" name="content"><br><br>
-      <label for="datetime">Enter Date and Time: </label>
-      <input type="datetime-local" id="Time" name="datetime"><br><br>
-      <label for="Notification Time">Notification Time: </label>
-      <input type="time" id="Notification Time" name="Notification Time"><br><br>
-      <label for="recurDays"></label>
-      
-       <label for="Recurrence Dropdown">Select reccurence: </label>
-      <select name="recurences" id="Recurence Dropdown" onchange="changeFunc(value)">
-        <option value="once">once</option>
-        <option value="daily">daily</option>
-        <option value="weekly">weekly</option>
-      </select> <br> <br>
-      
-    
+  <form id="main">
+    <label for="number">Enter Your Phone Number: </label>
+    <input type="text" id="Phone Number" name="number"><br><br>
+    <label for="content">Enter the content of your Reminder: </label>
+    <input type="text" id="Content" name="content"><br><br>
+    <label for="datetime">Enter Date and Time: </label>
+    <input type="datetime-local" id="Time" name="datetime"><br><br>
+    <label for="Notification Time">Notification Time: </label>
+    <input type="time" id="Notification Time" name="Notification Time"><br><br>
+    <label for="recurDays"></label>
 
-    
-    </form>
-    <script src="testButton.js"></script>
+    <label for="Recurrence Dropdown">Select reccurence: </label>
+    <select name="recurences" id="Recurence Dropdown" onchange="changeFunc(value)">
+      <option value="once">once</option>
+      <option value="daily">daily</option>
+      <option value="weekly">weekly</option>
+    </select> <br> <br>
 
 
-    <input type="submit" value="Submit" id="Submit Button" onClick="addButton()">
+
+
+  </form>
+  <script src="testButton.js"></script>
+
+
+  <input type="submit" value="Submit" id="Submit Button" onClick="addButton()">
 
   </form>
 </body>
+
 </html>
