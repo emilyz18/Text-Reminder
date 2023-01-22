@@ -78,6 +78,11 @@ input[type=submit] {
 
 }
 
+select {
+  border-radius: 10px;
+  border: 2px solid #73AD21;
+}
+
 
 #Content {
   border-radius: 25px;
